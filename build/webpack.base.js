@@ -104,7 +104,7 @@ const webpackConfig = {
     optimization:{
         minimizer:isDev ? [] : [
 
-            // new TerserPlugin(),
+            new TerserPlugin(),
 
             //压缩css
             new OptimizeCSSAssetsPlugin()
