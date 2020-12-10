@@ -1,7 +1,5 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -14,6 +12,8 @@ const resolve = function(paths){
 
 const isDev = argv.mode === 'development'
 
+console.log(isDev)
+
 
 const webpackConfig = {
     entry:{
@@ -21,7 +21,7 @@ const webpackConfig = {
     },
     output:{
         path:resolve('../dist'),
-        filename: isDev ? '[name]'.js : 'js/[name].[chunkhash:8].js'
+        filename: isDev ? '[name].js' : 'js/[name].[chunkhash:8].js'
     },
     resolve:{
         alias:{
@@ -104,7 +104,7 @@ const webpackConfig = {
     optimization:{
         minimizer:isDev ? [] : [
 
-            new TerserPlugin(),
+            // new TerserPlugin(),
 
             //压缩css
             new OptimizeCSSAssetsPlugin()
@@ -126,13 +126,10 @@ const webpackConfig = {
             template:path.resolve(__dirname,'../public/index.html'),
             inject:true
         }),
-        new VueLoaderPlugin(),
-        new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new VueLoaderPlugin()
     ]
 }
-
-if(isDev){
+if(!isDev){
     webpackConfig.plugins.push(
         new MiniCssExtractPlugin({
             filename:'css/[name].[contenthash:8].css',

@@ -7,23 +7,23 @@ const webpack = require('webpack')
 const config = require('../config')
 const webpackConfig = require('./webpack.prod')
 
-
-process.env.NODE_ENV = 'production'
-
 const spinner = ora('building for production...')
 
 spinner.start()
 
-rm(path.join(config.build.assetsRoot),err => {
-    console.log(err)
+rm(config.build.assetsRoot,err => {
+    if(err){
+      console.log(err)
+    }
 })
 
-rm(path.join(config.build.assetsRoot,config.build.assetsSubDirectory),err => {
-    if(err) throw err;
 
+rm(path.join(config.build.assetsRoot,config.build.assetsSubDirectory),err => {
+    if(err) throw new Error(err);
+    
     webpack(webpackConfig,function(err,stats){
         spinner.stop()
-        if(err) throw err;
+        if(err)throw err
         process.stdout.write(stats.toString({
             colors:true,
             modules:false,
