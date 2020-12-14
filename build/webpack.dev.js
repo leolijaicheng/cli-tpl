@@ -1,6 +1,7 @@
 const { merge } = require('webpack-merge')
 const base = require('./webpack.base')
 const webpack = require('webpack')
+const env = reuqire('../config/dev.env')
 
 
 module.exports = merge(base,{
@@ -12,7 +13,10 @@ module.exports = merge(base,{
       hints:false
     },
     plugins:[
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({
+            env:env
+        })
     ]
     // devServer:{
     //     contentBase:'./dist',

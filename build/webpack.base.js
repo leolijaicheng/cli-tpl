@@ -4,6 +4,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
+const AutoDllPlugin = require('autodll-webpack-plugin')
 const argv = require('minimist')(process.argv.slice(2))
 
 const resolve = function(paths){
@@ -126,7 +128,24 @@ const webpackConfig = {
             template:path.resolve(__dirname,'../public/index.html'),
             inject:true
         }),
+        new AutoDllPlugin({
+            // context:resolve('..'),
+            inject:true,
+            debug:true,
+            filename:'[name]_[hash].js',
+            path:'./dll',
+            entry:{
+                vendor:[
+                    'vue',
+                    'vue-router',
+                    'lodash'
+                ]
+            }
+        }),
         new VueLoaderPlugin()
+        // new webpack.DllReferencePlugin({
+        //     mainfest:require('../public/dll/vendor.manifest')
+        // })
     ]
 }
 if(!isDev){

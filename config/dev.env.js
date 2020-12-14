@@ -1,4 +1,4 @@
 module.exports = {
-    NODE_ENV:'development',
-    NODE_API:''
+    NODE_ENV:'"development"',
+    NODE_API:'""'
 }
