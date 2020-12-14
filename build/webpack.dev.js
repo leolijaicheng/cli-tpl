@@ -1,7 +1,7 @@
 const { merge } = require('webpack-merge')
 const base = require('./webpack.base')
 const webpack = require('webpack')
-const env = reuqire('../config/dev.env')
+const env = require('../config/dev.env')
 
 
 module.exports = merge(base,{

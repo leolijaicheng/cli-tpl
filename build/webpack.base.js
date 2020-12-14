@@ -7,15 +7,19 @@ const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 const AutoDllPlugin = require('autodll-webpack-plugin')
 const argv = require('minimist')(process.argv.slice(2))
+const threadLoader = require('thread-loader')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const resolve = function(paths){
     return path.resolve(__dirname,paths)
 }
 
+threadLoader.warmup({},[
+    'babel-loader',
+    '@babel/preset-env'
+])
+
 const isDev = argv.mode === 'development'
-
-console.log(isDev)
-
 
 const webpackConfig = {
     entry:{
@@ -23,7 +27,7 @@ const webpackConfig = {
     },
     output:{
         path:resolve('../dist'),
-        filename: isDev ? '[name].js' : 'js/[name].[chunkhash:8].js'
+        filename: isDev ? 'static/js/[name].js' : 'static/js/[name].[chunkhash:8].js'
     },
     resolve:{
         alias:{
@@ -67,14 +71,26 @@ const webpackConfig = {
             {
                 test:/\.js$/,
                 include:[resolve('../src')],
-                use:{
-                    loader:'babel-loader',
-                    options:{
-                        presets:[
-                            ['@babel/preset-env',{ targets:'defaults' }]
-                        ]
+                use:[
+                   'thread-loader',
+                    {
+                        loader:'babel-loader',
+                        options:{
+                            presets:[
+                                [
+                                    '@babel/preset-env',
+                                    { 
+                                        useBuiltIns:'usage',
+                                        corejs:{
+                                            version:3
+                                        },
+                                        targets:'defaults'
+                                    }
+                                ]
+                            ]
+                        }
                     }
-                }
+                ]
             },
             {
                 test:/\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -83,7 +99,8 @@ const webpackConfig = {
                         loader:'url-loader',
                         options:{
                             limit:10000,
-                            name:resolve('img/[name].[hash:7].[ext]')
+                            name:resolve('[name].[hash:7].[ext]'),
+                            outputPath:'static/image'
                         }
                     },
                     {
@@ -100,6 +117,14 @@ const webpackConfig = {
                     }
                 ]
              
+            },
+            {
+                test:/(\.(ttf|woff|eot)$|iconfont\.svg)/,
+                loader:'file-loader',
+                options:{
+                    name:'[name].[hash:8].[ext]',
+                    outputPath:'static/font'
+                }
             }
         ]
     },
@@ -142,7 +167,21 @@ const webpackConfig = {
                 ]
             }
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyWebpackPlugin({
+            patterns:[
+                { 
+                    from:resolve('../public'),
+                    to:resolve('../dist/static'),
+                    filter:(resourcePath) => {
+                        if(resourcePath.indexOf('.html') > -1){
+                            return false
+                        }
+                        return true
+                    }
+                }
+            ]
+        })
         // new webpack.DllReferencePlugin({
         //     mainfest:require('../public/dll/vendor.manifest')
         // })
@@ -151,8 +190,8 @@ const webpackConfig = {
 if(!isDev){
     webpackConfig.plugins.push(
         new MiniCssExtractPlugin({
-            filename:'css/[name].[contenthash:8].css',
-            chunkFilename:'css/[id].[contenthash:8].css'
+            filename:'static/css/[name].[contenthash:8].css',
+            chunkFilename:'static/css/[id].[contenthash:8].css'
         })
     )
 }
