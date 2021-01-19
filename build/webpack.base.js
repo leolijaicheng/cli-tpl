@@ -9,6 +9,7 @@ const AutoDllPlugin = require('autodll-webpack-plugin')
 const argv = require('minimist')(process.argv.slice(2))
 const threadLoader = require('thread-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const resolve = function(paths){
     return path.resolve(__dirname,paths)
@@ -23,7 +24,7 @@ const isDev = argv.mode === 'development'
 
 const webpackConfig = {
     entry:{
-        index:resolve('../src/main.js')
+        app:resolve('../src/main.js')
     },
     output:{
         path:resolve('../dist'),
@@ -64,32 +65,30 @@ const webpackConfig = {
                         }
                      },
                     'css-loader',
-                    'postcss-loader',
-                    'less-loader'
+                    'less-loader',
+                    'postcss-loader'
                 ]
             },
             {
-                test:/\.js$/,
+                test:/\.scss$/,
+                use:[
+                    isDev ? 'style-loader' : { 
+                        loader:MiniCssExtractPlugin.loader,
+                        options:{
+                            publicPath:'../'
+                        }
+                     },
+                    'css-loader',
+                    'sass-loader',
+                    'postcss-loader'
+                ]
+            },
+            {
+                test:/\.jsx?$/,
                 include:[resolve('../src')],
                 use:[
                    'thread-loader',
-                    {
-                        loader:'babel-loader',
-                        options:{
-                            presets:[
-                                [
-                                    '@babel/preset-env',
-                                    { 
-                                        useBuiltIns:'usage',
-                                        corejs:{
-                                            version:3
-                                        },
-                                        targets:'defaults'
-                                    }
-                                ]
-                            ]
-                        }
-                    }
+                   'babel-loader'
                 ]
             },
             {
@@ -98,8 +97,8 @@ const webpackConfig = {
                     {
                         loader:'url-loader',
                         options:{
-                            limit:10000,
-                            name:resolve('[name].[hash:7].[ext]'),
+                            limit:10240,
+                            name:resolve('[name].[hash:8].[ext]'),
                             outputPath:'static/image'
                         }
                     },
@@ -140,13 +139,14 @@ const webpackConfig = {
             chunks:'all',
             cacheGroups:{
                 vendor:{
-                    name:'venedor',
+                    name:'vendor',
                     test:/[\\/]node_modules[\\/]/,
                     priority:10
                 }
             }
         }
     },
+    stats:'errors-only',
     plugins:[
         new HtmlWebpackPlugin({
             title:'cli模板',
@@ -181,10 +181,8 @@ const webpackConfig = {
                     }
                 }
             ]
-        })
-        // new webpack.DllReferencePlugin({
-        //     mainfest:require('../public/dll/vendor.manifest')
-        // })
+        }),
+        new FriendlyErrorsWebpackPlugin()
     ]
 }
 if(!isDev){

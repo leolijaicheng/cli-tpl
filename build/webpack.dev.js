@@ -10,7 +10,7 @@ module.exports = merge(base,{
         index:['./src/main.js','webpack-hot-middleware/client?noInfo=true&reload=true']
     },
     performance:{
-      hints:false
+      hints:'warning'
     },
     plugins:[
         new webpack.HotModuleReplacementPlugin(),

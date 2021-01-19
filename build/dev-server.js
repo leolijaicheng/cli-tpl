@@ -2,6 +2,7 @@ const opn = require('opn')
 const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
+const chalk = require('chalk')
 const config = require('../config/index')
 const express = require('express')
 const webpack = require('webpack')
@@ -73,7 +74,10 @@ files.forEach(function(f){
 })
 
 devMiddleware.waitUntilValid(() => {
-    console.log('> Listening at ' + uri + '\n')
+
+    console.log('\n')
+
+    console.log(chalk.yellow('=> Server running at ' + uri + '\n'))
     
     if(autoOpenBrowser){
         opn(uri)
