@@ -1,4 +1,3 @@
-
-export function fetchItem(){
-    return Promise.resolve()
-} 
+export function fetchItem() {
+  return Promise.resolve()
+}

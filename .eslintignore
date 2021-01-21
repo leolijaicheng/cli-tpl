@@ -1,0 +1,7 @@
+/build/
+/config/
+/mock/
+/public/
+/dist/
+/static/
+/*.js

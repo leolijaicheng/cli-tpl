@@ -3,12 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-
 export default new Router({
-    routes:[
-        {
-            path:'/home',
-            component:() => import(/*webpackChunkName: "home"*/'@/views/home.vue')
-        }
-    ]
+  routes: [
+    {
+      path: '/home',
+      component: () => import(/*webpackChunkName: "home"*/ '@/views/home.vue')
+    }
+  ]
 })

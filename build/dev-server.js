@@ -8,7 +8,7 @@ const express = require('express')
 const webpack = require('webpack')
 const { createProxyMiddleware  } = require('http-proxy-middleware')
 const webpackConfigDev = require('./webpack.dev')
-const webpcckDevMiddleware = require('webpack-dev-middleware')
+const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const history = require('connect-history-api-fallback')
 
@@ -24,7 +24,7 @@ const app = express()
 
 const compiler = webpack(webpackConfigDev)
 
-const devMiddleware = webpcckDevMiddleware(compiler)
+const devMiddleware = webpackDevMiddleware(compiler)
 
 const hotMiddleware = webpackHotMiddleware(compiler,{
     log:false,
