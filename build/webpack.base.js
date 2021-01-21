@@ -11,6 +11,7 @@ const threadLoader = require('thread-loader')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 const resolve = function(paths){
     return path.resolve(__dirname,paths)
@@ -184,7 +185,8 @@ const webpackConfig = {
             ]
         }),
         new FriendlyErrorsWebpackPlugin(),
-        new ESLintPlugin()
+        new ESLintPlugin(),
+        new StylelintPlugin()
     ]
 }
 if(!isDev){

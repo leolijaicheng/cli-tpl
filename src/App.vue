@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="main-content">
     <h1 v-for="(item, index) in 5" :key="index" class="app-item">
       app {{ item }}
     </h1>
@@ -22,8 +22,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#app {
-  color: #ff0000;
+.main-content {
+  color: #f00;
   font-size: 24px;
 }
 </style>

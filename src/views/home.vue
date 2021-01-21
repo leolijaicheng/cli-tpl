@@ -24,10 +24,10 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  width: 400px;
-  height: 200px;
-  margin: 20px auto;
   border: 1px solid #000;
   border-radius: 10px;
+  height: 200px;
+  margin: 20px auto;
+  width: 400px;
 }
 </style>
