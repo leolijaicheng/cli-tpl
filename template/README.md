@@ -1,3 +1,24 @@
-## cli 模板仓库
+# cli 模板仓库
 
-webpack 配置模板
+## {{ name }}
+
+> {{ description }}
+
+## Build Setup
+
+```bash
+#install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+```
+
+
+

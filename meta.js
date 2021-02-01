@@ -18,6 +18,12 @@ module.exports = {
             }
             return options.inverse(this)
         },
+        if_es(v1,v2,v3,options){
+           if(v1 === v2 || v1 === v3){
+               return options.fn(this)
+           }
+           return options.inverse(this)
+        },
         template_version(){
             return templateVersion
         }
@@ -58,6 +64,10 @@ module.exports = {
         router:{
             type:'comfirm',
             message:'Install vue-router?'
+        },
+        vuex:{
+            type:'comfirm',
+            message:'Install vuex?'
         },
         lint:{
             type:'comfirm',

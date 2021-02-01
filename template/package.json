@@ -1,7 +1,8 @@
 {
-  "name": "cli-tpl",
+  "name": "{{ name }}",
   "version": "1.0.0",
-  "description": "",
+  "description": "{{description}}",
+  "author": "{{ author }}",
   "main": "index.js",
   "scripts": {
     "start": "node build/dev-server.js --mode development",
@@ -11,23 +12,25 @@
     "build:ssr": "webpack --config build/webpack.ssr.js --mode production",
     "build": "node build/build.js  --mode production",
     "serve": "node build/serve.js",
+    {{#lint}}
     "lint": "eslint --fix --ext .js --ext .vue src",
+    {{/lint}}
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@babel/runtime-corejs3": "^7.12.5",
-    "babel-eslint": "^10.1.0",
     "core-js": "^3.8.2",
     "lodash": "^4.17.20",
     "minimist": "^1.2.5",
     "regenerator-runtime": "^0.13.7",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-webpack-plugin": "^2.1.1",
+    {{#router}}
     "vue-router": "^3.4.9",
+    {{/router}}
     "vue-server-renderer": "^2.6.12",
     "vuex": "^3.6.0",
     "vuex-router-sync": "^5.0.0",
@@ -48,11 +51,27 @@
     "copy-webpack-plugin": "^6.4.0",
     "css-loader": "^5.0.1",
     "cz-conventional-changelog": "^3.3.0",
+    {{#lint}}
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.4.1",
     "eslint-webpack-plugin": "^2.4.3",
+    {{#if_eq lintConfig "standard"}}
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    {{/if_eq}}
+    {{#if_eq lintConfig "airbnb"}}
+    "eslint-config-airbnb-base": "^11.3.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.7.0",
+    {{/if_eq}}
+    {{/lint}}
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
@@ -106,5 +125,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

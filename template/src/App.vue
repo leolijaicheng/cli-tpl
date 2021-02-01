@@ -4,17 +4,23 @@
       app {{ item }}
     </h1>
 
-    <HelloWorld />
-
+    {{#router}}
     <router-view></router-view>
+    {{else}}
+    <HelloWorld />
+    {{/router}}
   </div>
 </template>
 
 <script>
+{{#unless router}}
 import HelloWorld from './component/HelloWorld'
+{{/unless}}
 import './app.css'
 export default {
+  {{#unless router}}
   components: { HelloWorld },
+  {{/unless}}
   mounted() {
     console.log('enter!!')
   }

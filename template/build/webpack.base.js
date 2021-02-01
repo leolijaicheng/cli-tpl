@@ -34,6 +34,9 @@ const webpackConfig = {
     },
     resolve:{
         alias:{
+            {{#if_eq build "standard"}}
+            'vue$':'vue/dist/vue.esm.js',
+            {{/if_eq}}
            '@':resolve('../src')
         },
         extensions:['.vue','.js','.json']
@@ -185,7 +188,9 @@ const webpackConfig = {
             ]
         }),
         new FriendlyErrorsWebpackPlugin(),
+        {{#lint}}
         new ESLintPlugin(),
+        {{/lint}}
         new StylelintPlugin()
     ]
 }

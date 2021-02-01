@@ -4,9 +4,6 @@
 
 <script>
 export default {
-  asyncData({ store, route }) {
-    return store.dispatch('fetchItem', route.params.id)
-  },
   methods: {
     add(list) {
       const arrList = list.filter((_) => _.multi).map((_) => _.id)
