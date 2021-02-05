@@ -133,6 +133,8 @@ module.exports = {
 
         const cwd = path.join(process.cwd(),data.inPlace ? '' : data.destDirName)
 
+        console.log('autoInstall',data.autoInstall)
+
         if(data.autoInstall){
             installDependencies(cwd,data.autoInstall,green)
                .then(() => {
