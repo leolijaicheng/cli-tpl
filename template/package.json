@@ -1,7 +1,7 @@
 {
   "name": "{{ name }}",
   "version": "1.0.0",
-  "description": "{{description}}",
+  "description": "{{ description }}",
   "author": "{{ author }}",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "build": "node build/build.js  --mode production",
     "serve": "node build/serve.js",
     {{#lint}}
-    "lint": "eslint --fix --ext .js --ext .vue src",
+    "lint":"eslint --fix --ext .js,.vue src",
     {{/lint}}
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,17 +24,14 @@
     "@babel/runtime-corejs3": "^7.12.5",
     "core-js": "^3.8.2",
     "lodash": "^4.17.20",
-    "minimist": "^1.2.5",
     "regenerator-runtime": "^0.13.7",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-webpack-plugin": "^2.1.1",
-    {{#router}}
-    "vue-router": "^3.4.9",
-    {{/router}}
-    "vue-server-renderer": "^2.6.12",
+    "vue": "^2.6.12",
+    {{#vuex}}
     "vuex": "^3.6.0",
-    "vuex-router-sync": "^5.0.0",
-    "webpack-node-externals": "^2.5.2"
+    {{/vuex}}
+    {{#router}}
+    "vue-router":"^3.4.9"
+    {{/router}}
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -94,11 +91,13 @@
     "stylelint": "^13.9.0",
     "stylelint-config-sass-guidelines": "^7.1.0",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-webpack-plugin": "^2.1.1",
+    "minimist": "^1.2.5",
     "stylelint-order": "^4.1.0",
     "stylelint-scss": "^3.18.0",
     "terser-webpack-plugin": "^4.2.3",
     "thread-loader": "^3.0.1",
-    "vue": "^2.6.12",
     "vue-loader": "^15.9.5",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.12",
@@ -107,6 +106,7 @@
     "webpack-dev-middleware": "^4.0.2",
     "webpack-dev-server": "^3.5.1",
     "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^2.5.2",
     "webpack-merge": "^5.4.0"
   },
   "husky": {

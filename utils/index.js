@@ -45,7 +45,7 @@ exports.runLintFix = function runLintFix(cwd,data,color){
    return Promise.resolve()
 }
 
-exports.printMesage = function printMesage(data,{ green,yellow }){
+exports.printMessage = function printMessage(data,{ green,yellow }){
     const message = `
 # ${green('Project initialization finished!')}
 # ===================
@@ -55,7 +55,7 @@ To get started:
    ${yellow(
        `${data.inPlace ? '' : `cd ${data.destDirName}\n `}${installMsg(
            data
-       )}${lintMsg(data)}npm run dev`
+       )}${lintMsg(data)}  npm run dev`
    )}
 
 Documentation can be found at https://vuejs-templates.github.io/webpack
@@ -75,7 +75,7 @@ function lintMsg(data){
 
 
 function installMsg(data){
-    return !data.autoInstall ? 'npm install (or if using yarn:yarn)\n ': ''
+    return !data.autoInstall ? '  npm install (or if using yarn:yarn)\n ': ''
 }
 
 

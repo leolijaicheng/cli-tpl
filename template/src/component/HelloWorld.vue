@@ -1,5 +1,5 @@
 <template>
-  <div>hello world!!!asdfasdf</div>
+  <div>hello world!!!{{msg}}</div>
 </template>
 
 <script>

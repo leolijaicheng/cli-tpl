@@ -63,15 +63,18 @@ module.exports = {
         },
         router:{
             type:'comfirm',
-            message:'Install vue-router?'
+            message:'Install vue-router ?',
+            default:true
         },
         vuex:{
             type:'comfirm',
-            message:'Install vuex?'
+            message:'Install vuex ?',
+            default:true
         },
         lint:{
             type:'comfirm',
-            message:'Use ESLint to lint your code?'
+            message:'Use ESLint to lint your code ?',
+            default:true
         },
         lintConfig:{
             when:'lint',
@@ -128,7 +131,7 @@ module.exports = {
 
         sortDependencies(data,green)
 
-        const cwd = path.join(process.cwd(),data.inPlace ? '' : destDirName)
+        const cwd = path.join(process.cwd(),data.inPlace ? '' : data.destDirName)
 
         if(data.autoInstall){
             installDependencies(cwd,data.autoInstall,green)
