@@ -53,7 +53,7 @@ module.exports = {
        ]
      }],
     {{/if_eq}}
-    "no-debugger":process.env.NODE_ENV === 'production' ? 'error' :' off',
+    "no-debugger":process.env.NODE_ENV === 'production' ? 'error' :'off',
     "no-console":process.env.NODE_ENV === 'proeduction' ? 'error' : 'off',
     "indent":["warn",2,{
       "SwitchCase":1,

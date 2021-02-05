@@ -64,17 +64,14 @@ module.exports = {
         router:{
             type:'comfirm',
             message:'Install vue-router ?',
-            default:true
         },
         vuex:{
             type:'comfirm',
             message:'Install vuex ?',
-            default:true
         },
         lint:{
             type:'comfirm',
             message:'Use ESLint to lint your code ?',
-            default:true
         },
         lintConfig:{
             when:'lint',
@@ -100,8 +97,8 @@ module.exports = {
         },
         autoInstall:{
             type:'list',
-            mesage:
-              'Should we run `npm install` for you after the project has been created?(recomended)',
+            message:
+               'Should we run `npm install` for you after the project has been created?(recomended)',
             choices: [
                 {
                     name: 'Yes, use NPM',
@@ -133,7 +130,6 @@ module.exports = {
 
         const cwd = path.join(process.cwd(),data.inPlace ? '' : data.destDirName)
 
-        console.log('autoInstall',data.autoInstall)
 
         if(data.autoInstall){
             installDependencies(cwd,data.autoInstall,green)

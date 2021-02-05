@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const { spwan } = require('child_process')
 
 const lintStyles = ['standard','airbnb']
 
@@ -24,7 +23,7 @@ exports.installDependencies = function installDependencies(
 ){
     console.log(`\n\n# ${color('Installing project dependencies ...')}`)
     console.log('# ===================\n')
-    return runCommand(executable,['insatll'],{ cwd })
+    return runCommand(executable,['install'],{ cwd })
 }
 
 
@@ -81,7 +80,7 @@ function installMsg(data){
 
 function runCommand(cmd,args,options){
     return new Promise((resolve,reject) => {
-        const spawn = spawn(
+        const spawn =  require('child_process').spawn(
             cmd,
             args,
             Object.assign(
