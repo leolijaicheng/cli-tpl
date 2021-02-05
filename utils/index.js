@@ -68,7 +68,7 @@ function lintMsg(data){
     return !data.autoInstall && 
        data.lint && 
        lintStyles.indexOf(data.lintConfig) !== -1
-       ? 'npm run lint -- --fix (or for yarn:yarn run lint --fix)\n '
+       ? '  npm run lint -- --fix (or for yarn:yarn run lint --fix)\n '
        : ''
 }
 

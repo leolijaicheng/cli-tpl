@@ -64,14 +64,17 @@ module.exports = {
         router:{
             type:'comfirm',
             message:'Install vue-router ?',
+            default:true
         },
         vuex:{
             type:'comfirm',
             message:'Install vuex ?',
+            default:true
         },
         lint:{
             type:'comfirm',
             message:'Use ESLint to lint your code ?',
+            default:true
         },
         lintConfig:{
             when:'lint',
