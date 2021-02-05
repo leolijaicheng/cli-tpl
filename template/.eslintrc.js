@@ -33,11 +33,11 @@ module.exports = {
         config:'build/webpack.base.js'
       }
     }
-  }
+  },
   {{/if_es}}
   rules: {
     {{#if_eq lintConfig "standard"}}
-    "gengerator-star-spacing":"off"
+    "gengerator-star-spacing":"off",
     {{/if_eq}}
     {{#if_eq lintConfig "airbnb"}}
      "import/extensions":['error','always',{

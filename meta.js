@@ -38,7 +38,7 @@ module.exports = {
             type:'string',
             required:false,
             message:'Project description',
-            default:'A Vue.js project'
+            default:'A Vue.js initialize project'
         },
         author:{
             type:'string',
