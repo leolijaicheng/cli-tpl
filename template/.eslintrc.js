@@ -27,13 +27,13 @@ module.exports = {
     "vue"
   ],
   {{#if_es lintConfig "standard" "airbnb"}}
-  settings:{
-    'import/resolver':{
-      webpack:{
-        config:'build/webpack.base.js'
-      }
-    }
-  },
+  // settings: {
+  //   'import/resolver': {
+  //     webpack: {
+  //       config: 'build/webpack.base.js'
+  //     }
+  //   }
+  // },
   {{/if_es}}
   rules: {
     {{#if_eq lintConfig "standard"}}
