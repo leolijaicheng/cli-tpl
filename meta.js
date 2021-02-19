@@ -63,18 +63,15 @@ module.exports = {
         },
         router:{
             type:'comfirm',
-            message:'Install vue-router ?',
-            default:true
+            message:'Install vue-router ?'
         },
         vuex:{
             type:'comfirm',
-            message:'Install vuex ?',
-            default:true
+            message:'Install vuex ?'
         },
         lint:{
             type:'comfirm',
-            message:'Use ESLint to lint your code ?',
-            default:true
+            message:'Use ESLint to lint your code ?'
         },
         lintConfig:{
             when:'lint',
